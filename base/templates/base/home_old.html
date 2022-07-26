@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{%block content%}
+
+<style>
+    .container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+<h1>This is the Dynamic Home Page</h1>
+<div class="container">
+    <!-- feed -->
+    <div>
+        {% include 'base/topic.html' %}
+    </div>
+    <div class="">
+        <a href="{% url 'create-form' %}">createform</a>
+        <!-- feed component -->
+        {% include 'base/feed.html' %}
+    </div>
+
+    <div>
+        <!-- Recent Activity -->
+        {% include 'base/recent_activity.html' %}
+    </div>
+    </div>
+
+</div>
+
+{%endblock%}

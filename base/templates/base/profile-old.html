@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>{{user}}</h1>
+<div class="profile-container">
+    <div>
+        {{topic.name}}
+    </div>
+    <div>
+        {% for room in rooms %}
+        {% if request.user == room.host%}
+        <a href="{% url 'update-form' room.id %}">Edit</a>
+        <a href="{% url 'delete-room' room.id %}">Delete</a>
+        {%endif%}
+        <span><a href="{% url 'profile' room.host.id %}">@ {{room.host}}</a></span>
+        <div>
+            <h3>{{room.id}} --<a href="{% url 'room' room.id %}"> {{room.name}}</h3></a>
+        </div>
+        <span>{{room.topic}}</span>
+        <br><br>
+        <hr>
+        {% endfor %}
+    </div>
+    <div>
+
+        {% if request.user == message.user %}
+        <a href="{% url 'deletemssg' message.id %}">Delete</a>
+        {% endif %}
+    
+        <small>@{{message.user}}</small>
+        <small>{{message.created|timesince}} ago</small>
+    
+        <p>{{message}}</p>
+
+    </div>
+</div>
+{% endblock %}
